@@ -26,15 +26,15 @@ describe SockJS::Transports::EventSource, :type => :transport, :em => true do
     end
 
     it "should respond with HTTP 200" do
-      response.status.should eql(200)
+      expect(response.status).to eql(200)
     end
 
     it "should respond with event stream MIME type" do
-      response.headers["Content-Type"].should match("text/event-stream")
+      expect(response.headers["Content-Type"]).to match("text/event-stream")
     end
 
     it "should disable caching" do
-      response.headers["Cache-Control"].should eql("no-store, no-cache, must-revalidate, max-age=0")
+      expect(response.headers["Cache-Control"]).to eql("no-store, no-cache, must-revalidate, max-age=0")
     end
 
     it "should write two empty lines for Opera" do

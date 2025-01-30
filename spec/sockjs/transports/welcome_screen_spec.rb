@@ -21,16 +21,16 @@ describe SockJS::Transports::WelcomeScreen do
     end
 
     it "should respond with HTTP 200" do
-      response.status.should eql(200)
+      expect(response.status).to eql(200)
     end
 
     it "should respond with plain text MIME type" do
-      response.headers["Content-Type"].should match("text/plain")
+      expect(response.headers["Content-Type"]).to match("text/plain")
     end
 
     it "should return greeting in the body" do
       response # Run the handler.
-      response.chunks.last.should eql("Welcome to SockJS!\n")
+      expect(response.chunks.last).to eql("Welcome to SockJS!\n")
     end
   end
 end

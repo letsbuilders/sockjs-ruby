@@ -29,12 +29,12 @@ describe SockJS::Transports::WebSocket, :type => :transport do
       end
 
       it "should report itself disabled" do
-        transport.should be_disabled
+        expect(transport).to be_disabled
       end
 
       it "should respond with 404 and an error message" do
-        response.status.should eql(404)
-        response.chunks.last.should eql("WebSockets Are Disabled")
+        expect(response.status).to eql(404)
+        expect(response.chunks.last).to eql("WebSockets Are Disabled")
       end
     end
 
@@ -44,8 +44,8 @@ describe SockJS::Transports::WebSocket, :type => :transport do
       end
 
       it "should respond with 400 and an error message" do
-        response.status.should eql(400)
-        response.chunks.last.should eql('Can "Upgrade" only to "WebSocket".')
+        expect(response.status).to eql(400)
+        expect(response.chunks.last).to eql('Can "Upgrade" only to "WebSocket".')
       end
     end
 
@@ -56,8 +56,8 @@ describe SockJS::Transports::WebSocket, :type => :transport do
       end
 
       it "should respond with 400 and an error message" do
-        response.status.should eql(400)
-        response.chunks.last.should eql('"Connection" must be "Upgrade".')
+        expect(response.status).to eql(400)
+        expect(response.chunks.last).to eql('"Connection" must be "Upgrade".')
       end
     end
 
@@ -95,7 +95,7 @@ describe SockJS::Transports::WebSocket, :type => :transport do
 
   describe "#send" do
     it "should be defined, but it should do nothing" do
-      transport.should respond_to(:send)
+      expect(transport).to respond_to(:send)
     end
   end
 end

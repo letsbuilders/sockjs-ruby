@@ -23,7 +23,7 @@ describe SockJS::Transports::IFrame, :type => :transport do
       end
 
       it "should respond with HTTP 304" do
-        response.status.should eql(304)
+        expect(response.status).to eql(304)
       end
     end
 
@@ -35,11 +35,11 @@ describe SockJS::Transports::IFrame, :type => :transport do
       end
 
       it "should respond with HTTP 200" do
-        response.status.should eql(200)
+        expect(response.status).to eql(200)
       end
 
       it "should respond with HTML MIME type" do
-        response.headers["Content-Type"].should match("text/html")
+        expect(response.headers["Content-Type"]).to match("text/html")
       end
 
       it "should set ETag header"
@@ -47,19 +47,19 @@ describe SockJS::Transports::IFrame, :type => :transport do
       it "should set cache control to be valid for the next year" do
         time = Time.now + 31536000
 
-        response.headers["Cache-Control"].should eql("public, max-age=31536000")
-        response.headers["Expires"].should eql(time.gmtime.to_s)
-        response.headers["Access-Control-Max-Age"].should eql("1000001")
+        expect(response.headers["Cache-Control"]).to eql("public, max-age=31536000")
+        expect(response.headers["Expires"]).to eql(time.gmtime.to_s)
+        expect(response.headers["Access-Control-Max-Age"]).to eql("1000001")
       end
 
       it "should return HTML wrapper in the body" do
         response # Run the handler.
-        response.chunks.last.should match(/document.domain = document.domain/)
+        expect(response.chunks.last).to match(/document.domain = document.domain/)
       end
 
       it "should set sockjs_url" do
         response # Run the handler.
-        response.chunks.last.should match(transport.options[:sockjs_url])
+        expect(response.chunks.last).to match(transport.options[:sockjs_url])
       end
     end
   end

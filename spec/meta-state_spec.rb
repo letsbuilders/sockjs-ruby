@@ -48,7 +48,7 @@ describe MetaState::Machine do
   end
 
   it "should start in a state" do
-    machine.current_state.should == TestMachine::One
+    expect(machine.current_state).to eq TestMachine::One
   end
 
   it "should raise a WrongStateError for bad messages" do
@@ -60,7 +60,7 @@ describe MetaState::Machine do
   it "should transition between states" do
     machine.a
     machine.b
-    machine.current_state.should == TestMachine::Three
+    expect(machine.current_state).to eq TestMachine::Three
   end
 
   it "should use included modules" do
@@ -73,6 +73,6 @@ describe MetaState::Machine do
     machine.a
     machine.b
     machine.c
-    machine.current_state.should == TestMachine::One
+    expect(machine.current_state).to eq TestMachine::One
   end
 end

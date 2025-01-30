@@ -31,11 +31,11 @@ describe "XHR", :type => :transport, :em => true do
         end
 
         it "should respond with HTTP 200" do
-          response.status.should eql(200)
+          expect(response.status).to eql(200)
         end
 
         it "should respond with javascript MIME type" do
-          response.headers["Content-Type"].should match("application/javascript")
+          expect(response.headers["Content-Type"]).to match("application/javascript")
         end
 
         it "should run user code"
@@ -46,25 +46,25 @@ describe "XHR", :type => :transport, :em => true do
         end
 
         it "should create one and send an opening frame" do
-          response.chunks.last.should eql("o\n")
+          expect(response.chunks.last).to eql("o\n")
         end
 
         it "should respond with HTTP 200" do
-          response.status.should eql(200)
+          expect(response.status).to eql(200)
         end
 
         it "should respond with javascript MIME type" do
-          response.headers["Content-Type"].should match("application/javascript")
+          expect(response.headers["Content-Type"]).to match("application/javascript")
         end
 
         it "should set access control" do
-          response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-          response.headers["Access-Control-Allow-Credentials"].should eql("true")
+          expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+          expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
         end
 
         it "should set session ID" do
           cookie = response.headers["Set-Cookie"]
-          cookie.should match("JSESSIONID=#{request.session_id}; path=/")
+          expect(cookie).to match("JSESSIONID=#{request.session_id}; path=/")
         end
       end
     end
@@ -79,24 +79,24 @@ describe "XHR", :type => :transport, :em => true do
       end
 
       it "should respond with HTTP 204" do
-        response.status.should eql(204)
+        expect(response.status).to eql(204)
       end
 
       it "should set access control" do
-        response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-        response.headers["Access-Control-Allow-Credentials"].should eql("true")
+        expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+        expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
       end
 
       it "should set cache control to be valid for the next year" do
         time = Time.now + 31536000
 
-        response.headers["Cache-Control"].should eql("public, max-age=31536000")
-        response.headers["Expires"].should eql(time.gmtime.to_s)
-        response.headers["Access-Control-Max-Age"].should eql("1000001")
+        expect(response.headers["Cache-Control"]).to eql("public, max-age=31536000")
+        expect(response.headers["Expires"]).to eql(time.gmtime.to_s)
+        expect(response.headers["Access-Control-Max-Age"]).to eql("1000001")
       end
 
       it "should set Allow header to OPTIONS, POST" do
-        response.headers["Allow"].should eql("OPTIONS, POST")
+        expect(response.headers["Allow"]).to eql("OPTIONS, POST")
       end
     end
   end
@@ -128,21 +128,21 @@ describe "XHR", :type => :transport, :em => true do
           end
 
           it "should respond with HTTP 204" do
-            response.status.should eql(204)
+            expect(response.status).to eql(204)
           end
 
           it "should respond with plain text MIME type" do
-            response.headers["Content-Type"].should match("text/plain")
+            expect(response.headers["Content-Type"]).to match("text/plain")
           end
 
           it "should set session ID" do
             cookie = response.headers["Set-Cookie"]
-            cookie.should match("JSESSIONID=#{request.session_id}; path=/")
+            expect(cookie).to match("JSESSIONID=#{request.session_id}; path=/")
           end
 
           it "should set access control" do
-            response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-            response.headers["Access-Control-Allow-Credentials"].should eql("true")
+            expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+            expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
           end
         end
 
@@ -156,7 +156,7 @@ describe "XHR", :type => :transport, :em => true do
           end
 
           it "should respond with HTTP 500" do
-            response.status.should eql(500)
+            expect(response.status).to eql(500)
           end
 
           it "should report JSON error" do
@@ -175,7 +175,7 @@ describe "XHR", :type => :transport, :em => true do
           end
 
           it "should respond with HTTP 500" do
-            response.status.should eql(500)
+            expect(response.status).to eql(500)
           end
 
           it "should report JSON error" do
@@ -187,16 +187,16 @@ describe "XHR", :type => :transport, :em => true do
 
       context "without a session" do
         it "should respond with HTTP 404" do
-          response.status.should eql(404)
+          expect(response.status).to eql(404)
         end
 
         it "should respond with plain text MIME type" do
-          response.headers["Content-Type"].should match("text/plain")
+          expect(response.headers["Content-Type"]).to match("text/plain")
         end
 
         it "should return error message in the body" do
           response # Run the handler.
-          request.chunks.last.should match(/Session is not open\!/)
+          expect(request.chunks.last).to match(/Session is not open\!/)
         end
       end
     end
@@ -211,24 +211,24 @@ describe "XHR", :type => :transport, :em => true do
       end
 
       it "should respond with HTTP 204" do
-        response.status.should eql(204)
+        expect(response.status).to eql(204)
       end
 
       it "should set access control" do
-        response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-        response.headers["Access-Control-Allow-Credentials"].should eql("true")
+        expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+        expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
       end
 
       it "should set cache control to be valid for the next year" do
         time = Time.now + 31536000
 
-        response.headers["Cache-Control"].should eql("public, max-age=31536000")
-        response.headers["Expires"].should eql(time.gmtime.to_s)
-        response.headers["Access-Control-Max-Age"].should eql("1000001")
+        expect(response.headers["Cache-Control"]).to eql("public, max-age=31536000")
+        expect(response.headers["Expires"]).to eql(time.gmtime.to_s)
+        expect(response.headers["Access-Control-Max-Age"]).to eql("1000001")
       end
 
       it "should set Allow header to OPTIONS, POST" do
-        response.headers["Allow"].should eql("OPTIONS, POST")
+        expect(response.headers["Allow"]).to eql("OPTIONS, POST")
       end
     end
   end
@@ -257,7 +257,7 @@ describe "XHR", :type => :transport, :em => true do
       end
 
       it "should respond with HTTP 200" do
-        response.status.should eql(200)
+        expect(response.status).to eql(200)
       end
 
       it "should respond with prelude + open frame" do
@@ -266,17 +266,17 @@ describe "XHR", :type => :transport, :em => true do
       end
 
       it "should respond with javascript MIME type" do
-        response.headers["Content-Type"].should match("application/javascript")
+        expect(response.headers["Content-Type"]).to match("application/javascript")
       end
 
       it "should set access control" do
-        response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-        response.headers["Access-Control-Allow-Credentials"].should eql("true")
+        expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+        expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
       end
 
       it "should set session ID" do
         cookie = response.headers["Set-Cookie"]
-        cookie.should match("JSESSIONID=#{request.session_id}; path=/")
+        expect(cookie).to match("JSESSIONID=#{request.session_id}; path=/")
       end
     end
   end
@@ -290,24 +290,24 @@ describe "XHR", :type => :transport, :em => true do
       end
 
       it "should respond with HTTP 204" do
-        response.status.should eql(204)
+        expect(response.status).to eql(204)
       end
 
       it "should set access control" do
-        response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-        response.headers["Access-Control-Allow-Credentials"].should eql("true")
+        expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+        expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
       end
 
       it "should set cache control to be valid for the next year" do
         time = Time.now + 31536000
 
-        response.headers["Cache-Control"].should eql("public, max-age=31536000")
-        response.headers["Expires"].should eql(time.gmtime.to_s)
-        response.headers["Access-Control-Max-Age"].should eql("1000001")
+        expect(response.headers["Cache-Control"]).to eql("public, max-age=31536000")
+        expect(response.headers["Expires"]).to eql(time.gmtime.to_s)
+        expect(response.headers["Access-Control-Max-Age"]).to eql("1000001")
       end
 
       it "should set Allow header to OPTIONS, POST" do
-        response.headers["Allow"].should eql("OPTIONS, POST")
+        expect(response.headers["Allow"]).to eql("OPTIONS, POST")
       end
     end
   end
