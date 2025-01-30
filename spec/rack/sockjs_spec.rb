@@ -40,7 +40,7 @@ describe Rack::SockJS do
     end
 
     it "should route to websockets" do
-      route.app.should be_an_instance_of(::SockJS::Transports::WebSocket)
+      expect(route.app).to be_an_instance_of(::SockJS::Transports::WebSocket)
     end
   end
 

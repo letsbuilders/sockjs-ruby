@@ -42,7 +42,7 @@ describe SockJS::Protocol do
     it "should return a valid closing frame" do
       expect {
         frame = SockJS::Protocol::ClosingFrame.new(2010, "message")
-        frame.to_s.should eql('c[2010,"message"]')
+        expect(frame.to_s).to eql('c[2010,"message"]')
       }.not_to raise_error
     end
   end

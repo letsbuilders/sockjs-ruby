@@ -23,19 +23,19 @@ describe SockJS::Transport do
 
     it "should be false if the current class is in disabled_transports" do
       subject.options[:disabled_transports] = [subject.class]
-      subject.should be_disabled
+      expect(subject).to be_disabled
     end
   end
 
   describe "#session_class" do
     it "should be a valid class" do
-      subject.session_class.should be_kind_of(Class)
+      expect(subject.session_class).to be_kind_of(Class)
     end
   end
 
   describe "#response_class" do
     it "should be a valid class" do
-      subject.response_class.should be_kind_of(Class)
+      expect(subject.response_class).to be_kind_of(Class)
     end
   end
 
