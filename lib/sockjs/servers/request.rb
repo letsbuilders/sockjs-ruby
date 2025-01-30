@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "uri"
+require "rack"
 
 module SockJS
   #This is the SockJS wrapper for a Rack env hash-like.  Currently it requires
@@ -17,13 +18,13 @@ module SockJS
     # request.path_info
     # => /echo/abc
     def path_info
-      env["PATH_INFO"]
+      env[Rack::PATH_INFO]
     end
 
     # request.http_method
     # => "GET"
     def http_method
-      env["REQUEST_METHOD"]
+      env[Rack::REQUEST_METHOD]
     end
 
     def async_callback
@@ -119,7 +120,7 @@ module SockJS
 
     def callback
       callback = self.query_string["callback"] || self.query_string["c"]
-      URI.unescape(callback) if callback
+      unescape(callback) if callback
     end
 
     def keep_alive?
@@ -132,6 +133,16 @@ module SockJS
 
     def fresh?(etag)
       self.headers["if-none-match"] == etag
+    end
+
+    private
+
+    def unescape(string)
+      if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.0.0')
+        URI.unescape(string)
+      else
+        URI.decode_www_form_component(string)
+      end
     end
   end
 end

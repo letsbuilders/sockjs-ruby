@@ -31,15 +31,15 @@ describe SockJS::Transports::HTMLFile, :em => true, :type => :transport do
       end
 
       it "should respond with HTTP 200" do
-        response.status.should eql(200)
+        expect(response.status).to eql(200)
       end
 
       it "should respond with HTML MIME type" do
-        response.headers["Content-Type"].should match("text/html")
+        expect(response.headers["Content-Type"]).to match("text/html")
       end
 
       it "should disable caching" do
-        response.headers["Cache-Control"].should eql("no-store, no-cache, must-revalidate, max-age=0")
+        expect(response.headers["Cache-Control"]).to eql("no-store, no-cache, must-revalidate, max-age=0")
       end
 
       it "should return HTML wrapper in the body" do
@@ -52,16 +52,16 @@ describe SockJS::Transports::HTMLFile, :em => true, :type => :transport do
 
     context "without callback specified" do
       it "should respond with HTTP 500" do
-        response.status.should eql(500)
+        expect(response.status).to eql(500)
       end
 
       it "should respond with HTML MIME type" do
-        response.headers["Content-Type"].should match("text/html")
+        expect(response.headers["Content-Type"]).to match("text/html")
       end
 
       it "should return error message in the body" do
         response # Run the handler.
-        response.chunks.last.should match(/"callback" parameter required/)
+        expect(response.chunks.last).to match(/"callback" parameter required/)
       end
     end
   end

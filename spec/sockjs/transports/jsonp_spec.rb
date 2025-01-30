@@ -41,11 +41,11 @@ describe "JSONP", :em => true, :type => :transport do
           end
 
           it "should respond with HTTP 200" do
-            response.status.should eql(200)
+            expect(response.status).to eql(200)
           end
 
           it "should respond with plain text MIME type" do
-            response.headers["Content-Type"].should match("application/javascript")
+            expect(response.headers["Content-Type"]).to match("application/javascript")
           end
 
           it "should respond with a body"
@@ -53,20 +53,20 @@ describe "JSONP", :em => true, :type => :transport do
 
         context "without any session" do
           it "should respond with HTTP 200" do
-            response.status.should eql(200)
+            expect(response.status).to eql(200)
           end
 
           it "should respond with javascript MIME type" do
-            response.headers["Content-Type"].should match("application/javascript")
+            expect(response.headers["Content-Type"]).to match("application/javascript")
           end
 
           it "should set access control" do
-            response.headers["Access-Control-Allow-Origin"].should eql(request.origin)
-            response.headers["Access-Control-Allow-Credentials"].should eql("true")
+            expect(response.headers["Access-Control-Allow-Origin"]).to eql(request.origin)
+            expect(response.headers["Access-Control-Allow-Credentials"]).to eql("true")
           end
 
           it "should disable caching" do
-            response.headers["Cache-Control"].should eql("no-store, no-cache, must-revalidate, max-age=0")
+            expect(response.headers["Cache-Control"]).to eql("no-store, no-cache, must-revalidate, max-age=0")
           end
 
           it "should open a new session"
@@ -75,15 +75,15 @@ describe "JSONP", :em => true, :type => :transport do
 
       context "without callback specified" do
         it "should respond with HTTP 500" do
-          response.status.should eql(500)
+          expect(response.status).to eql(500)
         end
 
         it "should respond with HTML MIME type" do
-          response.headers["Content-Type"].should match("text/html")
+          expect(response.headers["Content-Type"]).to match("text/html")
         end
 
         it "should return error message in the body" do
-          response.chunks.last.should match(/"callback" parameter required/)
+          expect(response.chunks.last).to match(/"callback" parameter required/)
         end
       end
     end
@@ -121,17 +121,17 @@ describe "JSONP", :em => true, :type => :transport do
             end
 
             it "should respond with HTTP 200" do
-              response.status.should eql(200)
+              expect(response.status).to eql(200)
             end
 
             it "should set session ID" do
               cookie = response.headers["Set-Cookie"]
-              cookie.should match("JSESSIONID=#{request.session_id}; path=/")
+              expect(cookie).to match("JSESSIONID=#{request.session_id}; path=/")
             end
 
             it "should write 'ok' to the body stream" do
               response # Run the handler.
-              response.chunks.last.should eql("ok")
+              expect(response.chunks.last).to eql("ok")
             end
           end
 
@@ -149,16 +149,16 @@ describe "JSONP", :em => true, :type => :transport do
 
             it "should respond with HTTP 404" do
               SockJS::debug!
-              response.status.should eql(404)
+              expect(response.status).to eql(404)
             end
 
             it "should respond with plain text MIME type" do
-              response.headers["Content-Type"].should match("text/plain")
+              expect(response.headers["Content-Type"]).to match("text/plain")
             end
 
             it "should return error message in the body" do
               response # Run the handler.
-              response.chunks.last.should match(/Session is not open\!/)
+              expect(response.chunks.last).to match(/Session is not open\!/)
             end
           end
         end
@@ -178,17 +178,17 @@ describe "JSONP", :em => true, :type => :transport do
             end
 
             it "should respond with HTTP 200" do
-              response.status.should eql(200)
+              expect(response.status).to eql(200)
             end
 
             it "should set session ID" do
               cookie = response.headers["Set-Cookie"]
-              cookie.should match("JSESSIONID=#{request.session_id}; path=/")
+              expect(cookie).to match("JSESSIONID=#{request.session_id}; path=/")
             end
 
             it "should write 'ok' to the body stream" do
               response # Run the handler.
-              response.chunks.last.should eql("ok")
+              expect(response.chunks.last).to eql("ok")
             end
           end
 
@@ -204,15 +204,15 @@ describe "JSONP", :em => true, :type => :transport do
             end
 
             it "should respond with HTTP 404" do
-              response.status.should eql(404)
+              expect(response.status).to eql(404)
             end
 
             it "should respond with plain text MIME type" do
-              response.headers["Content-Type"].should match("text/plain")
+              expect(response.headers["Content-Type"]).to match("text/plain")
             end
 
             it "should return error message in the body" do
-              response.chunks.last.should match(/Session is not open\!/)
+              expect(response.chunks.last).to match(/Session is not open\!/)
             end
           end
         end
@@ -234,16 +234,16 @@ describe "JSONP", :em => true, :type => :transport do
           end
 
           it "should respond with HTTP 500" do
-            response.status.should eql(500)
+            expect(response.status).to eql(500)
           end
 
           it "should respond with HTML MIME type" do
-            response.headers["Content-Type"].should match("text/html")
+            expect(response.headers["Content-Type"]).to match("text/html")
           end
 
           it "should return error message in the body" do
             response # Run the handler.
-            response.chunks.last.should match(/Payload expected./)
+            expect(response.chunks.last).to match(/Payload expected./)
           end
         end
       end

@@ -14,7 +14,7 @@ require 'sockjs/version'
 
 module TransportSpecMacros
   def transport_handler_eql(path, method)
-    describe SockJS::Transport do
+    describe "SockJS::Transport" do
       describe "transports[#{path}]" do
         let :route_set do
           double("Route Set")
@@ -33,7 +33,7 @@ module TransportSpecMacros
         end
 
         it "should have a #{described_class} at #{method}" do
-          route_set.should_receive(:add_route).with(instance_of(described_class), hash_including(:path_info, :request_method => method), {})
+          expect(route_set).to receive(:add_route).with(instance_of(described_class), hash_including(:path_info, :request_method => method), {})
           described_class.add_route(route_set, connection, options)
         end
       end

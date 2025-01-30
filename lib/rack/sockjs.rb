@@ -5,6 +5,7 @@ require "sockjs/transport"
 require "sockjs/servers/request"
 require "sockjs/servers/response"
 
+require "rack"
 require 'rack/mount'
 
 require 'sockjs/duck-punch-rack-mount'
@@ -74,8 +75,8 @@ module Rack
       end
 
       def call(env)
-        prefix = env["PATH_INFO"]
-        method = env["REQUEST_METHOD"]
+        prefix = env[Rack::PATH_INFO]
+        method = env[Rack::REQUEST_METHOD]
         body = <<-HTML
           <!DOCTYPE html>
           <html>

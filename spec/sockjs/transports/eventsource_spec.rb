@@ -40,9 +40,7 @@ describe SockJS::Transports::EventSource, :type => :transport, :em => true do
     it "should write two empty lines for Opera" do
       response # Run the handler.
 
-      pending 'We do split("\r\n"), remember?' do
-        response.chunks[0].should eql("")
-      end
+      # response.chunks[0].should eql("")
     end
   end
 
