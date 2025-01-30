@@ -21,7 +21,7 @@ module SockJS
       attr_reader :method_map
 
       def call(env)
-        app = @method_map.fetch(env["REQUEST_METHOD"])
+        app = @method_map.fetch(env[Rack::REQUEST_METHOD])
         app.call(env)
       rescue KeyError
         ::SockJS.debug "Method not supported!"
@@ -133,7 +133,7 @@ module SockJS
     def call(env)
       @remote_addr = env["REMOTE_ADDR"]
       @http_origin = env["HTTP_ORIGIN"]
-      SockJS.debug "Request for #{self.class}: #{env["REQUEST_METHOD"]}/#{env["PATH_INFO"]}"
+      SockJS.debug "Request for #{self.class}: #{env[Rack::REQUEST_METHOD]}/#{env[Rack::PATH_INFO]}"
       request = ::SockJS::Request.new(env)
       EM.next_tick do
         handle(request)

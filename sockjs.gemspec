@@ -1,8 +1,6 @@
 #!/usr/bin/env gem build
 # encoding: utf-8
 
-require 'base64'
-
 require File.expand_path('../lib/sockjs/version', __FILE__)
 
 Gem::Specification.new do |s|
@@ -17,13 +15,13 @@ Gem::Specification.new do |s|
   DESC
 
   # Ruby version
-  s.required_ruby_version = ::Gem::Requirement.new('>= 1.9')
+  s.required_ruby_version = ::Gem::Requirement.new('>= 3.0')
 
   # Dependencies
   s.add_dependency 'rack'
   s.add_dependency 'thin'
   s.add_dependency 'json'
-  s.add_dependency 'faye-websocket', '~> 0.10.7'
+  s.add_dependency 'faye-websocket', '~> 0.11.3'
   s.add_dependency 'rack-mount', '~> 0.8.3'
 
   # Files
