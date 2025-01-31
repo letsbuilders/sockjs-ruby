@@ -1,30 +1,21 @@
 PATH
   remote: .
   specs:
-    sockjs (0.3.4.2)
+    sockjs (0.3.4.3)
       faye-websocket (~> 0.11.3)
       json
+      racc
       rack
       rack-mount (~> 0.8.3)
+      sorted_set
       thin
 
 GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.2.0)
-    calibrate (0.0.1)
-    caliph (0.3.1)
-    corundum (0.6.1)
-      bundler
-      caliph (~> 0.3)
-      mattock (~> 0.9)
-      paint (~> 0.8.7)
-      rspec (>= 2.0)
-      simplecov (>= 0.5.4)
-      simplecov-json (>= 0.2)
     daemons (1.4.1)
     diff-lcs (1.5.1)
-    docile (1.4.1)
     eventmachine (1.2.7)
     faye-websocket (0.11.3)
       eventmachine (>= 0.12.0)
@@ -32,19 +23,14 @@ GEM
     json (2.9.1)
     macaddr (1.7.2)
       systemu (~> 2.6.5)
-    mattock (0.10.1)
-      calibrate (~> 0.0.1)
-      caliph (~> 0.3)
-      rake (~> 10.0)
-      tilt (> 0)
-      valise (~> 1.1)
-    paint (0.8.7)
+    racc (1.8.1)
     rack (2.2.10)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
-    rake (10.5.0)
+    rake (13.2.1)
+    rbtree (0.4.6)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -58,24 +44,17 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.2)
-    simplecov (0.22.0)
-      docile (~> 1.1)
-      simplecov-html (~> 0.11)
-      simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.1)
-    simplecov-json (0.2.3)
-      json
-      simplecov
-    simplecov_json_formatter (0.1.4)
+    set (1.1.1)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     systemu (2.6.5)
     thin (1.8.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
-    tilt (2.6.0)
     uuid (2.3.9)
       macaddr (~> 1.0)
-    valise (1.2.1)
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
@@ -87,14 +66,14 @@ PLATFORMS
   arm64-darwin-24
 
 DEPENDENCIES
-  corundum
   faye-websocket
   rack
   rack-test
+  rake
   rspec
   sockjs!
   thin (>= 1.8.2)
   uuid
 
 BUNDLED WITH
-   2.3.9
+   2.6.3

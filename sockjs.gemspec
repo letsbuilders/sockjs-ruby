@@ -18,11 +18,13 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ::Gem::Requirement.new('>= 3.0')
 
   # Dependencies
-  s.add_dependency 'rack'
-  s.add_dependency 'thin'
-  s.add_dependency 'json'
   s.add_dependency 'faye-websocket', '~> 0.11.3'
+  s.add_dependency 'json'
+  s.add_dependency 'racc'
+  s.add_dependency 'rack'
   s.add_dependency 'rack-mount', '~> 0.8.3'
+  s.add_dependency 'sorted_set'
+  s.add_dependency 'thin'
 
   # Files
   s.files = %w[

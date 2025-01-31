@@ -1,46 +1,9 @@
-# vim: set ft=ruby :
-require 'corundum/tasklibs'
-
-module Corundum
-  Corundum::register_project(__FILE__)
-
-  core = Core.new
-
-  core.in_namespace do
-    GemspecFiles.new(core)
-    QuestionableContent.new(core) do |dbg|
-      dbg.words = %w{debug! debugger}
-    end
-    rspec = RSpec.new(core)
-    cov = SimpleCov.new(core, rspec) do |cov|
-      cov.threshold = 70
-      cov.coverage_filter = proc do |path|
-        /\.rb$/ =~ path and /version/ !~ path
-      end
-    end
-
-    gem = GemBuilding.new(core)
-    cutter = GemCutter.new(core,gem)
-    email = Email.new(core)
-    vc = Git.new(core) do |vc|
-      vc.branch = "master"
-    end
-
-    yd = YARDoc.new(core)
-
-    docs = DocumentationAssembly.new(core, yd, rspec, cov)
-
-    pages = GithubPages.new(docs)
-  end
-end
-
-task :default => [:release, :publish_docs]
-
-
 # Get list of all the tests in format for TODO.todo.
+require 'socket'
+Bundler.require(:default, :development)
 
 task :unpack_tests do
-  version = "0.2.1"
+  version = "0.3.4"
 
   tests = {}
   File.foreach("protocol/sockjs-protocol-#{version}.py").each_with_object(tests) do |line, buffer|
