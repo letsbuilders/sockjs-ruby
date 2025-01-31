@@ -120,7 +120,7 @@ module SockJS
 
     def callback
       callback = self.query_string["callback"] || self.query_string["c"]
-      unescape(callback) if callback
+      URI.decode_www_form_component(callback) if callback
     end
 
     def keep_alive?
@@ -133,16 +133,6 @@ module SockJS
 
     def fresh?(etag)
       self.headers["if-none-match"] == etag
-    end
-
-    private
-
-    def unescape(string)
-      if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.0.0')
-        URI.unescape(string)
-      else
-        URI.decode_www_form_component(string)
-      end
     end
   end
 end
